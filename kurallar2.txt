@@ -1,0 +1,29 @@
+Briç el görsellerindeki kartları oku ve PBN formatında ver.
+
+KESİN KURALLAR VE SIFIR TAHMİN (TEMPERATURE 0.0) PRENSİBİ:
+
+1. RENK VE SEMBOL AYRIMI (Kritik):
+   - TAHMİN YAPMA. TAHMİN YAPMAK YASAKTIR.
+   - Siyah renkleri karıştırma: ♣ Sinek (Clubs - yonca) ile ♠ Maça (Spades - mızrak) simgelerini tam doğrula.
+   - Kırmızı renkleri karıştırma: ♥ Kör (Hearts - kalp) ile ♦ Karo (Diamonds - baklava) simgelerini dikkatle ayır.
+   - Her renkteki kart sayısını ve kart üzerindeki sembolleri (pip) tek tek say. Görmediğin veya emin olmadığın kart için asla tahmin yapma.
+
+2. EL BÜTÜNLÜĞÜ VE MÜKERRER KART ÖZ-DÜZELTME (SELF-CORRECTION) PROTOKOLÜ:
+   - Her oyuncunun elinde tam 13 kart olmak zorundadır. Toplamda 52 kartın tamamını ve mükerrer kart olmadığını kontrol et.
+   - Mükerrer kart (C_dup) ve eksik kart (C_miss) tespit edilirse şu otomatik düzeltme adımlarını uygula:
+     * Görsel Şüphe Bölgesi Tespiti: Mükerrer okunan C_dup kartının yer aldığı iki farklı el ve sütunu yeniden tara.
+     * Sadece İlgili Renk Grubu Karşılaştırması: Sadece C_dup okunan kartların simgelerini C_miss kartının rengi ve değeriyle karşılaştır (Siyah renklerde ♠/♣, kırmızı renklerde ♥/♦ karmaşası veya 6/9, 10/J yön-değer okuma hataları).
+     * Hipotez Tekilleştirme: C_miss kartının rengi ve değeri, C_dup konumlarından hangisine görsel/bağlamsal olarak uyuşuyorsa değişimi o elde gerçekleştir.
+     * Bütünlük Doğrulaması: Değişim sonrası 4 elin de 13'er kartlık benzersiz küme oluşturduğunu doğrula.
+     * Sıfır Tahmin Bariyeri: Görsel veya bağlamsal tekil bir eşleşme kurulamıyorsa TAHMİN YAPMA. Hangi elde ve sütunda çelişki olduğunu bildirerek kullanıcı onayı iste.
+
+3. BORD NUMARASI VE YÖN MAPPING'İ:
+   - Bord Numarası Tespiti: Dosya adında yer alan bord numarasını (örneğin `bordno_2_NORTH...` dosya adındaki `2` değerini) alarak PBN başlığındaki `[Board "X"]` alanına yaz.
+   - Yön Eşleştirme: Yükleme sırasından bağımsız olarak, dosya adındaki yön etiketlerine (NORTH, EAST, SOUTH, WEST) göre elleri PBN standart dizilimi olan "N:North East South West" sırasıyla diz:
+     * 1. El (N:): "NORTH" etiketli görseldeki kartlar
+     * 2. El: "EAST" etiketli görseldeki kartlar
+     * 3. El: "SOUTH" etiketli görseldeki kartlar
+     * 4. El: "WEST" etiketli görseldeki kartlar
+
+4. ÇIKTI FORMATI:
+   - Yanıtı varsayılan olarak doğrudan "code snippet" (```pbn kod bloğu) içinde kopyalanabilir/indirilebilir olarak ver.
